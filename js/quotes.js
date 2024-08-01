@@ -1,19 +1,4 @@
-window.onload = go;
-function go() {
-  // Triggers genRandQuote when New Quote button is clicked
-  $("#new-quote").click(function() {
-    genRandQuote();
-  });
-  
-  $("#tweet-quote").click(function() {
-    
-  });
-
-  // Generate a random quote when window is loaded initially
-  genRandQuote();
-}
-
-const quotes = [
+export const quotes = [
     {
     id: 1,
     text: "I have just three things to teach: simplicity, patience, compassion. These three are your greatest treasures.",
@@ -542,32 +527,3 @@ const quotes = [
   
   
 ];
-
-function genRandQuote() {
-  if (quotes.length === 0) {
-    console.error("Quotes array is empty!");
-    return;
-  }
-
-  const randIndex = Math.floor(Math.random() * quotes.length);
-  const randQuote = quotes[randIndex];
-
-  console.log("Generated quote:", randQuote); // Debug log to see the selected quote
-
-  $("#text").html(randQuote.text);
-  $("#author").html(randQuote.author);
-  $("#tweet-quote").attr("href", stringToClickToTweetURL(`"${randQuote.text}" - ${randQuote.author}`));
-
-  // Change background color
-  const colors = ["#2c3e50", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#f39c12", "#d35400", "#c0392b"];
-  const newColor = colors[Math.floor(Math.random() * colors.length)];
-  $("body, html").css("background-color", newColor);
-  $("#quote-box").css("color", newColor);
-}
-
-// This function makes strings into click to tweet URLs
-function stringToClickToTweetURL(str) {
-  // Convert to Click to Tweet URL
-  const encodedStr = encodeURIComponent(str);
-  return `https://twitter.com/intent/tweet?text=${encodedStr}`;
-}
